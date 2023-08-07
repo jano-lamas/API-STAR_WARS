@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: API-FILM
+  description: Busqueda de film de star-wars
+  version: 1.0.11
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: Authentication  
+    description: Autenticacion 
+  - name: Film  
+    description: Todo acerca de films 
+
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Authentication
+      description: Autenticarse en api
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/postAuthentication'     
+      responses:
+        '200':
+          description: Token for connection
+        '500':
+          description: Server error.
+  /film:
+    post:
+      tags:
+        - Film
+      security:
+      - bearerAuth: []
+      summary: insertar film
+      description: Insertar nuevo film a nuestra bd
+      operationId: insert
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/Post-film'     
+      responses:
+        '200':
+          description: schema pendiente
+        '500':
+          description: schema pendiente    
+    get:
+      tags:
+        - Film
+      summary: trae todos los film
+      description: obtiene todos los film
+      operationId: getAll
+      parameters:
+        - name: title
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: schema pendiente
+        '500':
+          description: schema pendiente              
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    postAuthentication:
+      type: object
+      properties:
+        email:
+          type: string
+          description: "email de usuario"
+          example: "user@email.com"
+        password:
+          type: string
+          description: "user password"
+          example: "password"
+    Post-film:
+      type: object
+      properties:
+        title:
+          type: string
+          description: "Título de la película"
+          example: "ROGE ON1E"
+        episode_id:
+          type: integer
+          description: "ID del episodio"
+          example: 71
+        opening_crawl:
+          type: string
+          description: "Introducción de la película"
+          example: "El Imperio va a construir una estación espacial capaz de destruir planetas, conocida como la Estrella de la Muerte. Los rebeldes se embarcan en una misión extraordinaria: robar los planos y sabotear la estación."
+        director:
+          type: string
+          description: "Director de la película"
+          example: "Gareth Edwards"
+        producer:
+          type: string
+          description: "Productor de la película"
+          example: "Kathleen Kennedy"
+        release_date:
+          type: string
+          format: date
+          description: "Fecha de lanzamiento de la película"
+          example: "2016-12-15"
+        characters:
+          type: array
+          description: "Personajes de la película"
+          items:
+            type: string
+            example: "3"
+        planets:
+          type: array
+          description: "Planetas presentes en la película"
+          items:
+            type: string
+            example: "2"
+        starships:
+          type: array
+          description: "Naves espaciales presentes en la película"
+          items:
+            type: string
+            example: "2"
+        vehicles:
+          type: array
+          description: "Vehículos presentes en la película"
+          items:
+            type: string
+            example: "8"
+        species:
+          type: array
+          description: "Especies presentes en la película"
+          items:
+            type: string
+            example: "5"
+          
