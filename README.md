@@ -10,5 +10,5 @@ Funcionalidades extras pendientes:
 -Test Unitarios: Test total tanto para el controlador como Services de app
 -Documentación Swagger: Tener documentado el total de endpoint y con su autenticación para comprensión de API y su funcionamiento.
 
-deje un test unitario y el archivo de documentación, debería estar completo para una comprensión y lectura mas amigable del api.
+deje un test unitario y el archivo de documentación, debería estar completo para una comprensión y lectura mas amigable del api
 
